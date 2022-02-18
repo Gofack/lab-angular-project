@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from './user'
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 import { Observable } from 'rxjs';
 
@@ -24,6 +23,5 @@ export class InMemoryDataService implements InMemoryDbService {
 	}
 
 	constructor() { }
-
 
 }

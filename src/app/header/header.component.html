@@ -7,11 +7,12 @@
 		</a>
 		<nav>
 			<ul class="main-nav">
-				<li><a routerLink="/games">Games</a></li>
-				<li><a routerLink="/library">Library</a></li>
-				<li><a routerLink="/friends">Friends</a></li>
-				<li><a routerLink="/profile">Profile</a></li>
+				<li><a routerLink="/games" routerLinkActive="active">Games</a></li>
+				<li><a routerLink="/library" routerLinkActive="active">Library</a></li>
+				<li><a routerLink="/friends" routerLinkActive="active">Friends</a></li>
+				<li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
 			</ul>
 		</nav>
+		<a href="#" class="log-out" (click)="logOut()">Log out</a>
 	</div>
 </header>

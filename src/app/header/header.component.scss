@@ -4,6 +4,7 @@
 	background: $white;
 	box-shadow: 0 0.5rem 0.5rem rgba($black, 0.2);
 	padding: 0.8rem 0;
+	font-size: 2rem;
 	.container-fluid {
 		display: flex;
 		align-items: center;
@@ -15,7 +16,7 @@
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		font-size: 2rem;
+
 		display: flex;
 		align-items: center;
 		color: $black;
@@ -25,10 +26,20 @@
 				margin: 0;
 			}
 			a {
+				&.active {
+					color: $purple;
+				}
 				&:hover {
-					text-decoration: underline;
+					color: $purple;
 				}
 			}
+		}
+	}
+	.log-out {
+		display: inline-block;
+		margin-left: auto;
+		&:hover {
+			color: $purple;
 		}
 	}
 }

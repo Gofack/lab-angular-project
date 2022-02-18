@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../user';
-import { InMemoryDataService } from '../in-memory-data.service';
 import { AuthentificationService } from '../authentification.service'
 
 @Component({
@@ -16,6 +15,7 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.getUsers();
 	}
 
 	loginForm = new FormGroup({
@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
 		password: new FormControl()
 	});
 
+	getUsers(): void {
+		this.AuthentificationService.getUsers().subscribe(users => this.users = users);
+	}
+
 	onSubmit(): void {
-		this.AuthentificationService.authentificate(this.loginForm.value);
-		// this.AuthentificationService.getUsers().subscribe(users => this.users = users);
+		this.AuthentificationService.authentificate(this.loginForm.value, this.users);
 	}
 }
