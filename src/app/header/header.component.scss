@@ -1,0 +1,34 @@
+@import "../../styles";
+
+#header {
+	background: $white;
+	box-shadow: 0 0.5rem 0.5rem rgba($black, 0.2);
+	padding: 0.8rem 0;
+	.container-fluid {
+		display: flex;
+		align-items: center;
+	}
+	.logo {
+		margin-right: 2rem;
+	}
+	.main-nav {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 2rem;
+		display: flex;
+		align-items: center;
+		color: $black;
+		li {
+			margin-right: 2rem;
+			&:last-child {
+				margin: 0;
+			}
+			a {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}

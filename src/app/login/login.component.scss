@@ -1,0 +1,33 @@
+@import "../../styles.scss";
+
+.modal-holder {
+	height: 100vh;
+	width: 100%;
+	.modal-inner {
+		height: 100%;
+		display: flex;
+		.app-modal {
+			height: 34rem;
+			width: 32rem;
+			margin: auto;
+			background: $white;
+			border-radius: 0.4rem;
+			box-shadow: 0 0.4rem 0.4rem rgba($black, 0.25);
+			padding: 6rem;
+			text-align: center;
+			form {
+				font-size: 1.4rem;
+				text-align: left;
+			}
+			.form-group {
+				margin: 0 0 2rem;
+			}
+			.form-control {
+				font-size: 1.4rem;
+			}
+			.btn {
+				width: 100%;
+			}
+		}
+	}
+}

@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+$white: #fff;
+$black: #000;
+$gray: #e5e5e5;
+
+html {
+	font-size: 10px;
+}
+html,
+body {
+	margin: 0;
+}
+body {
+	font-family: "Roboto", sans-serif;
+	font-size: 1.4rem;
+	background: $gray;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+figure {
+	margin: 0;
+}
+#main {
+	padding: 5rem 0;
+}
+h2,
+.h2 {
+	font-size: 2.4rem;
+	margin: 0 0 2rem;
+}
+.btn {
+	font-size: 1.4rem;
+}
