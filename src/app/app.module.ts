@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
-import { InMemoryDataService } from './in-memory-data.service'
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { ProfileComponent } from './profile/profile.component';
-import { FriendsComponent } from './friends/friends.component';
-import { LibraryComponent } from './library/library.component';
-import { GamesComponent } from './games/games.component';
-import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './auth.guard';
+import { HeaderComponent } from './components/header/header.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FriendsComponent } from './components/friends/friends.component';
+import { LibraryComponent } from './components/library/library.component';
+import { GamesComponent } from './components/games/games.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [
@@ -23,7 +25,7 @@ import { AuthGuard } from './auth.guard';
 		FriendsComponent,
 		LibraryComponent,
 		GamesComponent,
-		LoginComponent
+		LoginComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -32,7 +34,16 @@ import { AuthGuard } from './auth.guard';
 		HttpClientModule,
 		HttpClientInMemoryWebApiModule.forRoot(
 			InMemoryDataService, { dataEncapsulation: false }
-		)
+		),
+		NoopAnimationsModule,
+		NgxLoadingModule.forRoot({
+			animationType: ngxLoadingAnimationTypes.circle,
+			backdropBackgroundColour: 'rgba(0,0,0,0)',
+			backdropBorderRadius: '4px',
+			primaryColour: '#0d6efd',
+			secondaryColour: '#fff',
+			tertiaryColour: '#ffffff'
+		})
 	],
 	providers: [
 		AuthGuard

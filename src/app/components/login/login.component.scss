@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@import "../../../styles.scss";
 
 .modal-holder {
 	height: 100vh;
@@ -7,7 +7,7 @@
 		height: 100%;
 		display: flex;
 		.app-modal {
-			height: 34rem;
+			min-height: 34rem;
 			width: 32rem;
 			margin: auto;
 			background: $white;
@@ -19,14 +19,18 @@
 				font-size: 1.4rem;
 				text-align: left;
 			}
-			.form-group {
-				margin: 0 0 2rem;
-			}
-			.form-control {
-				font-size: 1.4rem;
-			}
+
 			.btn {
 				width: 100%;
+			}
+			.message-block {
+				padding: 1rem;
+				background: rgba(red, 0.2);
+				border: 1px solid rgba(red, 0.5);
+				margin-bottom: 2rem;
+				p {
+					margin: 0;
+				}
 			}
 		}
 	}

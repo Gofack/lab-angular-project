@@ -1,0 +1,22 @@
+<div class="modal-holder">
+	<div class="modal-inner">
+		<div class="app-modal">
+			<h2>Profile</h2>
+			<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+				<div class="form-group">
+					<label for="userName" class="form-label">Username</label>
+					<input type="text" formControlName="userName" placeholder="Username" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="email" class="form-label">Email</label>
+					<input type="email" formControlName="email" placeholder="Email" class="form-control" readonly>
+				</div>
+				<div class="form-group">
+					<label for="userAge" class="form-label">Age</label>
+					<input type="text" formControlName="userAge" placeholder="Age" class="form-control">
+				</div>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
+		</div>
+	</div>
+</div>

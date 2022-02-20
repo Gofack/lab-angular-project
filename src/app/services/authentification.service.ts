@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
+import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 // import { UserService } from './user.service';
@@ -10,13 +10,11 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthentificationService {
 
-	// private readonly mockedUser: User = { "id": "1", "email": "johndoe@mail.com", "password": "test123" };
 	users: User[] = [];
 	isAuthentifacated = false;
 
 	constructor(
 		private http: HttpClient,
-		// private userService: UserService,
 		private router: Router
 	) { }
 
@@ -27,7 +25,7 @@ export class AuthentificationService {
 	authentificate(user: User, users: User[]): boolean {
 		if (this.checkCredentials(user, users)) {
 			this.isAuthentifacated = true;
-			this.router.navigate(['profile']);
+			this.router.navigate(['games']);
 			return true;
 		}
 		this.isAuthentifacated = false;

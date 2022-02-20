@@ -23,14 +23,40 @@ a {
 figure {
 	margin: 0;
 }
-#main {
-	padding: 5rem 0;
-}
 h2,
 .h2 {
 	font-size: 2.4rem;
 	margin: 0 0 2rem;
 }
 .btn {
+	font-size: 1.4rem;
+}
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+#main {
+	padding-top: 6.4rem;
+	height: 100%;
+	> .container {
+		height: 100%;
+	}
+}
+.section {
+	background: $white;
+	border-radius: 0.4rem;
+	box-shadow: 0 0.4rem 0.4rem rgba($black, 0.25);
+	padding: 2rem 6rem;
+	height: auto;
+	min-height: 100%;
+}
+.form-group {
+	margin: 0 0 2rem;
+}
+.form-control {
 	font-size: 1.4rem;
 }

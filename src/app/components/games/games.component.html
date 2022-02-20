@@ -1,0 +1,64 @@
+<section class="section">
+	<h2>Games</h2>
+	<div class="search-block">
+		<form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame()">
+			<div class="form-group">
+				<label for="search" class="form-label">Search Games</label>
+				<input type="search" formControlName="search" placeholder="Search Games" class="form-control">
+			</div>
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+	</div>
+	<!-- .search-block -->
+	<div class="content-holder">
+		<h2>Featured Games</h2>
+		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<div *ngFor="let game of games" class="col-md-4">
+						<div class="card" *ngIf="!game.selected">
+							<div class="top">
+								<h3>{{game.name}}</h3>
+								<span class="price">{{game.price}}</span>
+								<figure class="img-holder">
+									<img src="{{game.image}}" alt="image description">
+								</figure>
+							</div>
+							<div class="bot">
+								<p>{{game.description}}</p>
+								<button class="btn btn-primary" (click)="addToLibrary(game)">Add to Library</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside>
+					<form action="#">
+						<div class="form-group">
+							<label for="customRange2" class="form-label">Filter by price</label>
+							<input type="range" class="form-range" min="0" max="5" id="customRange2">
+							<div class="form-text">Any Price</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label">Filter by tag</label>
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">Indie</label>
+							</div>
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck2">
+								<label class="form-check-label" for="exampleCheck2">Action</label>
+							</div>
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck3">
+								<label class="form-check-label" for="exampleCheck3">Adventure</label>
+							</div>
+						</div>
+					</form>
+				</aside>
+			</div>
+		</div>
+		<ngx-loading [show]="loading"></ngx-loading>
+	</div>
+</section>
