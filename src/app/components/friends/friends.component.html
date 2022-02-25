@@ -1,1 +1,40 @@
-<p>friends works!</p>
+<section class="section">
+	<h2>Friends</h2>
+	<div class="search-block">
+		<form action="#" [formGroup]="searchFriendsForm" (ngSubmit)="searchFriends(inputSearch.value)">
+			<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Search Games</mat-label>
+				<input type="search" matInput placeholder="Search Games" formControlName="search" #inputSearch>
+			</mat-form-field>
+			<button mat-raised-button color="primary">Search</button>
+		</form>
+	</div>
+	<!-- .search-block -->
+	<div class="content-holder">
+		<div *ngIf="searchQuery; else currentFriends">
+			<h2>Search Friends: {{query}}</h2>
+			<ng-container *ngIf="users.length; else noResults">
+				<div class="friend-item" *ngFor="let user of users">
+					<span class="name">{{user.name}}</span>
+					<button mat-raised-button color="primary" (click)="addFriend(user)">Add Friend</button>
+				</div>
+			</ng-container>
+			<ng-template #noResults>
+				<h3>No results</h3>
+			</ng-template>
+		</div>
+		<ng-template #currentFriends>
+			<h2>My Friends</h2>
+			<ng-container *ngIf="userFriends.length; else noResults">
+				<div class="friend-item" *ngFor="let friend of userFriends">
+					<span class="name">{{friend.name}}</span>
+					<button mat-raised-button color="accent" (click)="removeFriend(friend)">Remove Friend</button>
+				</div>
+			</ng-container>
+			<ng-template #noResults>
+				<h3>No results</h3>
+			</ng-template>
+		</ng-template>
+		<ngx-loading [show]="loading"></ngx-loading>
+	</div>
+</section>

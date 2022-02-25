@@ -1,5 +1,5 @@
 <app-header *ngIf="authentificationservice.isAuthentifacated"></app-header>
-<main id="main">
+<main id="main" [class.padding-top]="authentificationservice.isAuthentifacated">
 	<div class="container">
 		<router-outlet></router-outlet>
 	</div>

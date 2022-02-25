@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Game } from '../interfaces/game';
 
 @Injectable({
@@ -18,5 +18,16 @@ export class GamesService {
 
 	addToLibrary(game: Game): Observable<any> {
 		return this.http.put('api/games', game);
+	}
+
+	getUserGames(arr: number[]) {
+		return this.http.get<Game[]>('api/games');
+	}
+
+	searchGames(term: string): Observable<Game[]> {
+		if (!term.trim()) {
+			return this.http.get<Game[]>('api/games');
+		}
+		return this.http.get<Game[]>(`api/games/?name=${term}&selected=false`);
 	}
 }

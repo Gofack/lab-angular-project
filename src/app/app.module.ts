@@ -5,6 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,11 +47,17 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 			primaryColour: '#0d6efd',
 			secondaryColour: '#fff',
 			tertiaryColour: '#ffffff'
-		})
+		}),
+		MatButtonModule,
+		MatCheckboxModule,
+		MatSliderModule,
+		MatInputModule
 	],
 	providers: [
 		AuthGuard
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	exports: [
+	]
 })
 export class AppModule { }

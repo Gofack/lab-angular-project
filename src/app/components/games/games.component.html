@@ -1,12 +1,13 @@
 <section class="section">
 	<h2>Games</h2>
 	<div class="search-block">
-		<form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame()">
-			<div class="form-group">
-				<label for="search" class="form-label">Search Games</label>
-				<input type="search" formControlName="search" placeholder="Search Games" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-primary">Search</button>
+		<!-- <form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame(inputSearch.value)"> -->
+		<form action="#" [formGroup]="filterForm" (ngSubmit)="onFiltersChange()">
+			<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Search Games</mat-label>
+				<input type="search" matInput placeholder="Search Games" formControlName="search" #inputSearch>
+			</mat-form-field>
+			<button mat-raised-button color="primary">Search</button>
 		</form>
 	</div>
 	<!-- .search-block -->
@@ -15,45 +16,97 @@
 		<div class="row">
 			<div class="col-md-9">
 				<div class="row">
-					<div *ngFor="let game of games" class="col-md-4">
-						<div class="card" *ngIf="!game.selected">
-							<div class="top">
-								<h3>{{game.name}}</h3>
-								<span class="price">{{game.price}}</span>
-								<figure class="img-holder">
-									<img src="{{game.image}}" alt="image description">
-								</figure>
-							</div>
-							<div class="bot">
-								<p>{{game.description}}</p>
-								<button class="btn btn-primary" (click)="addToLibrary(game)">Add to Library</button>
-							</div>
-						</div>
-					</div>
+					<ng-container *ngIf="filterSection; else regularResults">
+						<h1>filter</h1>
+						<ng-container *ngIf="innerFilteredGames; else regularFilter">
+							<h2>inner filter</h2>
+							<ng-container *ngIf="innerFilteredGames.length; else noResults">
+								<ng-container *ngFor="let game of innerFilteredGames">
+									<div class="col-md-4" *ngIf="!game.selected">
+										<div class="card">
+											<div class="top">
+												<h3>{{game.name}}</h3>
+												<span class="price">{{game.price}}</span>
+												<figure class="img-holder">
+													<img src="{{game.image}}" alt="image description">
+												</figure>
+											</div>
+											<div class="bot">
+												<p>{{game.description}}</p>
+												<button mat-raised-button color="primary" (click)="addToLibrary(game)">Add to Library</button>
+											</div>
+										</div>
+									</div>
+								</ng-container>
+							</ng-container>
+							<ng-template #noResults>
+								<h3>No results</h3>
+							</ng-template>
+						</ng-container>
+						<ng-template #regularFilter>
+							<ng-container *ngIf="filteredGames.length; else noResults">
+								<ng-container *ngFor="let game of filteredGames">
+									<div class="col-md-4" *ngIf="!game.selected">
+										<div class="card">
+											<div class="top">
+												<h3>{{game.name}}</h3>
+												<span class="price">{{game.price}}</span>
+												<figure class="img-holder">
+													<img src="{{game.image}}" alt="image description">
+												</figure>
+											</div>
+											<div class="bot">
+												<p>{{game.description}}</p>
+												<button mat-raised-button color="primary" (click)="addToLibrary(game)">Add to Library</button>
+											</div>
+										</div>
+									</div>
+								</ng-container>
+							</ng-container>
+							<ng-template #noResults>
+								<h3>No results</h3>
+							</ng-template>
+						</ng-template>
+					</ng-container>
+					<ng-template #regularResults>
+						<ng-container *ngIf="games.length; else noResults">
+							<ng-container *ngFor="let game of games">
+								<div class="col-md-4" *ngIf="!game.selected">
+									<div class="card">
+										<div class="top">
+											<h3>{{game.name}}</h3>
+											<span class="price">{{game.price}}</span>
+											<figure class="img-holder">
+												<img src="{{game.image}}" alt="image description">
+											</figure>
+										</div>
+										<div class="bot">
+											<p>{{game.description}}</p>
+											<button mat-raised-button color="primary" (click)="addToLibrary(game)">Add to Library</button>
+										</div>
+									</div>
+								</div>
+							</ng-container>
+						</ng-container>
+						<ng-template #noResults>
+							<h3>No results</h3>
+						</ng-template>
+					</ng-template>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<aside>
-					<form action="#">
+					<form action="#" [formGroup]="filterForm">
 						<div class="form-group">
 							<label for="customRange2" class="form-label">Filter by price</label>
-							<input type="range" class="form-range" min="0" max="5" id="customRange2">
-							<div class="form-text">Any Price</div>
+							<mat-slider min="{{sliderMin}}" max="{{sliderMax}}" step="1" value="{{value}}" (change)="onFiltersChange()" formControlName="slider"></mat-slider>
+							<div class="form-text">Max price: {{value}} UAH</div>
 						</div>
 						<div class="form-group">
 							<label class="form-label">Filter by tag</label>
-							<div class="mb-3 form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck1">
-								<label class="form-check-label" for="exampleCheck1">Indie</label>
-							</div>
-							<div class="mb-3 form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck2">
-								<label class="form-check-label" for="exampleCheck2">Action</label>
-							</div>
-							<div class="mb-3 form-check">
-								<input type="checkbox" class="form-check-input" id="exampleCheck3">
-								<label class="form-check-label" for="exampleCheck3">Adventure</label>
-							</div>
+							<section class="checkbox-group">
+								<mat-checkbox *ngFor="let genre of genresArr" class="example-margin" formControlName="{{genre | lowercase}}" (change)="onFiltersChange()">{{genre | titlecase}}</mat-checkbox>
+							</section>
 						</div>
 					</form>
 				</aside>

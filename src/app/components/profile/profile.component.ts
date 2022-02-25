@@ -1,21 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms'
+import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 @Component({
 	templateUrl: './profile.component.html',
 	styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 	private readonly email = sessionStorage.getItem('userEmail');
-	private readonly name = sessionStorage.getItem('userName');
-	private readonly age = sessionStorage.getItem('userAge');
 
-	constructor() { }
+	userId: number | null = JSON.parse(sessionStorage.getItem('userId') || '{}');
+	subscribtions = new Subscription();
+
+	constructor(
+		private userService: UserService
+	) { }
 
 	ngOnInit(): void {
 		this.profileForm.controls['email'].setValue(this.email);
-		this.profileForm.controls['userName'].setValue(this.name);
-		this.profileForm.controls['userAge'].setValue(this.age);
+
+		this.userService.getUser(this.userId).subscribe(user => {
+			this.profileForm.controls['userName'].setValue(user.name);
+			this.profileForm.controls['userAge'].setValue(user.age);
+		});
+	}
+
+	ngOnDestroy(): void {
+		this.subscribtions.unsubscribe();
 	}
 
 	profileForm = new FormGroup({
@@ -25,9 +36,12 @@ export class ProfileComponent implements OnInit {
 	});
 
 	onSubmit() {
-		sessionStorage.setItem('userName', this.profileForm.value.userName);
-		sessionStorage.setItem('userAge', this.profileForm.value.userAge);
-		this.profileForm.controls['userName'].setValue(sessionStorage.getItem('userName'));
-		this.profileForm.controls['userAge'].setValue(sessionStorage.getItem('userAge'));
+		this.subscribtions.add(
+			this.userService.getUser(this.userId).subscribe(user => {
+				user.name = this.profileForm.value.userName;
+				user.age = this.profileForm.value.userAge;
+				this.userService.updateUser(user).subscribe();
+			})
+		);
 	}
 }

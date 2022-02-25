@@ -1,1 +1,35 @@
-<p>library works!</p>
+<section class="section">
+	<h2>My Games</h2>
+	<div class="content-holder">
+		<h2>Featured Games</h2>
+		<div class="row">
+			<div class="col-md-9">
+				<div class="row">
+					<ng-container *ngFor="let game of userGames">
+						<div class="col-md-4">
+							<div class="card">
+								<div class="top">
+									<h3>{{game.name}}</h3>
+									<figure class="img-holder">
+										<img src="{{game.image}}" alt="image description">
+									</figure>
+								</div>
+								<div class="bot">
+									<p>{{game.description}}</p>
+									<div class="buttons-group">
+										<button mat-raised-button color="primary">Download</button>
+										<button mat-raised-button color="accent">Share</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ng-container>
+					<ng-container *ngIf="!userGames.length">
+						<h4>No games in library</h4>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+		<ngx-loading [show]="loading"></ngx-loading>
+	</div>
+</section>

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-// import { UserService } from './user.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -39,6 +38,8 @@ export class AuthentificationService {
 	checkEmail(email: string, users: User[]): boolean {
 		let match = users.find(user => user.email === email);
 		if (match) {
+			let id = JSON.stringify(match.id);
+			sessionStorage.setItem('userId', id);
 			return true;
 		}
 		return false;
