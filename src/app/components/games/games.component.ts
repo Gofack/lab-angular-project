@@ -47,12 +47,12 @@ export class GamesComponent implements OnInit, OnDestroy {
 							return game;
 						}
 						return false;
-					})
+					});
 				} else {
-					this.onFiltersChange();
+					// this.onFiltersChange();
+					this.innerFilteredGames = this.filteredGames;
 				}
 			})
-
 		);
 	}
 

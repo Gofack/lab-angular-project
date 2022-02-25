@@ -1,16 +1,10 @@
 {
   "hosting": {
-    "public": "dist/lab-angular-project",
+    "public": "dist/lab-anbular-project",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
