@@ -44,7 +44,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 			animationType: ngxLoadingAnimationTypes.circle,
 			backdropBackgroundColour: 'rgba(0,0,0,0)',
 			backdropBorderRadius: '4px',
-			primaryColour: '#0d6efd',
+			primaryColour: '#6c69ff',
 			secondaryColour: '#fff',
 			tertiaryColour: '#ffffff'
 		}),

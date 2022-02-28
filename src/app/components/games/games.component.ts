@@ -5,7 +5,6 @@ import { User } from '../../interfaces/user';
 import { GamesService } from '../../services/games.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
-import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
 	selector: 'app-games',
@@ -29,7 +28,6 @@ export class GamesComponent implements OnInit, OnDestroy {
 	subscribtions = new Subscription();
 	filterForm: FormGroup = new FormGroup({
 		slider: new FormControl(this.sliderMax),
-		search: new FormControl()
 	});
 
 	constructor(
@@ -40,16 +38,8 @@ export class GamesComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.getGames();
 		this.subscribtions.add(
-			this.filterForm.controls['search'].valueChanges.subscribe((value: string) => {
-				if (value) {
-					this.innerFilteredGames = this.filteredGames.filter(game => {
-						if (game.name.includes(value)) {
-							return game;
-						}
-						return false;
-					});
-				} else {
-					// this.onFiltersChange();
+			this.searchGameForm.controls['search'].valueChanges.subscribe((value: string) => {
+				if (!value) {
 					this.innerFilteredGames = this.filteredGames;
 				}
 			})
@@ -92,7 +82,6 @@ export class GamesComponent implements OnInit, OnDestroy {
 		this.subscribtions.add(
 			this.userService.getUser(userId).subscribe(user => {
 				user.library.push(gameId);
-				console.log(user);
 				this.userService.updateUser(user).subscribe(user => {
 					this.user = user;
 				});
@@ -102,12 +91,13 @@ export class GamesComponent implements OnInit, OnDestroy {
 
 	searchGame(term: string): void {
 		this.filterSection = true;
-		this.subscribtions.add(
-			this.gamesService.searchGames(term).subscribe(games => {
-				console.log(games);
-				this.filteredGames = games;
-			})
-		);
+
+		this.innerFilteredGames = this.filteredGames.filter(el => {
+			if (el.name.includes(term)) {
+				return el;
+			}
+			return false;
+		});
 	}
 
 	initSlider() {
@@ -118,22 +108,6 @@ export class GamesComponent implements OnInit, OnDestroy {
 		this.sliderMin = min;
 		this.value = this.sliderMax;
 		this.filterForm.controls['slider'].setValue(max);
-	}
-
-	onInputChange(event: MatSliderChange) {
-		this.value = event.value;
-		this.subscribtions.add(
-			this.gamesService.getGames().subscribe(games => {
-				this.games = games.filter(game => {
-					if (event.value !== null) {
-						if (parseInt(game.price) <= event.value) {
-							return game;
-						}
-					}
-					return false;
-				});
-			})
-		);
 	}
 
 	getGenres() {
@@ -164,36 +138,30 @@ export class GamesComponent implements OnInit, OnDestroy {
 		}
 
 		if (!genresArr.length) {
-			this.filteredGames = this.games;
+			this.innerFilteredGames = this.filteredGames;
+		}
+
+		if (formObj.slider) {
+			this.value = formObj.slider;
+			this.innerFilteredGames = this.filteredGames.filter(game => parseInt(game.price) <= formObj.slider);
 		}
 
 		genresArr.forEach(el => {
-			// if (!this.filteredGames.length) {
-			// 	this.filteredGames = this.games.filter(game => {
-			// 		if (game.genre.includes(el) && parseInt(game.price) <= formObj.slider) {
-			// 			return game;
-			// 		}
-			// 		return false;
-			// 	});
-			// } else {
-			if (!this.innerFilteredGames.length) {
-				this.innerFilteredGames = this.filteredGames.filter(game => {
-					if (game.genre.includes(el) && parseInt(game.price) <= formObj.slider) {
-						return game;
-					}
-					return false;
-				});
-			} else {
+			if (genresArr.length > 1) {
 				this.innerFilteredGames = this.innerFilteredGames.filter(game => {
 					if (game.genre.includes(el) && parseInt(game.price) <= formObj.slider) {
 						return game;
 					}
 					return false;
 				});
+			} else {
+				this.innerFilteredGames = this.filteredGames.filter(game => {
+					if (game.genre.includes(el) && parseInt(game.price) <= formObj.slider) {
+						return game;
+					}
+					return false;
+				});
 			}
-			// }
 		});
-		// console.log(this.innerFilteredGames);
-		// console.log(this.filteredGames);
 	}
 }

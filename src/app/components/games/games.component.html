@@ -1,8 +1,8 @@
 <section class="section">
 	<h2>Games</h2>
 	<div class="search-block">
-		<!-- <form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame(inputSearch.value)"> -->
-		<form action="#" [formGroup]="filterForm" (ngSubmit)="onFiltersChange()">
+		<form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame(inputSearch.value)">
+			<!-- <form action="#" [formGroup]="filterForm" (ngSubmit)="onFiltersChange()"> -->
 			<mat-form-field class="example-full-width" appearance="fill">
 				<mat-label>Search Games</mat-label>
 				<input type="search" matInput placeholder="Search Games" formControlName="search" #inputSearch>
@@ -17,9 +17,7 @@
 			<div class="col-md-9">
 				<div class="row">
 					<ng-container *ngIf="filterSection; else regularResults">
-						<h1>filter</h1>
 						<ng-container *ngIf="innerFilteredGames; else regularFilter">
-							<h2>inner filter</h2>
 							<ng-container *ngIf="innerFilteredGames.length; else noResults">
 								<ng-container *ngFor="let game of innerFilteredGames">
 									<div class="col-md-4" *ngIf="!game.selected">
