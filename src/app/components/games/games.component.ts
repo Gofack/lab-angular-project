@@ -93,6 +93,7 @@ export class GamesComponent implements OnInit, OnDestroy {
 		this.filterSection = true;
 
 		this.innerFilteredGames = this.filteredGames.filter(el => {
+			console.log(el.name);
 			if (el.name.includes(term)) {
 				return el;
 			}
