@@ -2,7 +2,6 @@
 	<h2>Games</h2>
 	<div class="search-block">
 		<form action="#" [formGroup]="searchGameForm" (ngSubmit)="searchGame(inputSearch.value)">
-			<!-- <form action="#" [formGroup]="filterForm" (ngSubmit)="onFiltersChange()"> -->
 			<mat-form-field class="example-full-width" appearance="fill">
 				<mat-label>Search Games</mat-label>
 				<input type="search" matInput placeholder="Search Games" formControlName="search" #inputSearch>
@@ -20,7 +19,7 @@
 						<ng-container *ngIf="innerFilteredGames; else regularFilter">
 							<ng-container *ngIf="innerFilteredGames.length; else noResults">
 								<ng-container *ngFor="let game of innerFilteredGames">
-									<div class="col-md-4" *ngIf="!game.selected">
+									<div class="col-md-6 col-lg-4" *ngIf="!game.selected">
 										<div class="card">
 											<div class="top">
 												<h3>{{game.name}}</h3>
@@ -44,7 +43,7 @@
 						<ng-template #regularFilter>
 							<ng-container *ngIf="filteredGames.length; else noResults">
 								<ng-container *ngFor="let game of filteredGames">
-									<div class="col-md-4" *ngIf="!game.selected">
+									<div class="col-md-6 col-lg-4" *ngIf="!game.selected">
 										<div class="card">
 											<div class="top">
 												<h3>{{game.name}}</h3>
@@ -69,7 +68,7 @@
 					<ng-template #regularResults>
 						<ng-container *ngIf="games.length; else noResults">
 							<ng-container *ngFor="let game of games">
-								<div class="col-md-4" *ngIf="!game.selected">
+								<div class="col-md-6 col-lg-4" *ngIf="!game.selected">
 									<div class="card">
 										<div class="top">
 											<h3>{{game.name}}</h3>

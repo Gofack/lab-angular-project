@@ -4,9 +4,14 @@
 	form {
 		display: flex;
 		align-items: center;
+		@media screen and (max-width: 767.98px) {
+			flex-wrap: wrap;
+		}
 		.form-group {
 			flex-grow: 1;
-			margin: 0 0.8rem 0 0;
+			@media screen and (min-width: 768px) {
+				margin: 0 0.8rem 0 0;
+			}
 		}
 		.btn {
 			flex-shrink: 0;
@@ -14,7 +19,15 @@
 		}
 		.mat-form-field {
 			flex-grow: 1;
-			margin: 0 0.8rem 0 0;
+			margin-bottom: 1rem;
+			@media screen and (min-width: 768px) {
+				margin: 0 0.8rem 0 0;
+			}
+		}
+		.mat-button-base {
+			@media screen and (max-width: 767.98px) {
+				margin: 0 auto;
+			}
 		}
 		.mat-form-field-wrapper {
 			padding: 0;
@@ -26,10 +39,18 @@
 	padding: 2rem 0;
 	> .row {
 		margin: 0 -1.5rem;
+		@media screen and (max-width: 767.98px) {
+			flex-direction: column-reverse;
+			> div {
+				margin-bottom: 2rem;
+			}
+		}
 		> div {
 			padding: 0 1.5rem;
 			&.col-md-3 {
-				border-left: 1px solid;
+				@media screen and (min-width: 768px) {
+					border-left: 1px solid;
+				}
 			}
 		}
 		.row {

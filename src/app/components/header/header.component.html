@@ -1,18 +1,23 @@
 <header id="header">
 	<div class="container-fluid">
-		<a class="logo" routerLink="/">
-			<figure class="ico-holder">
-				<img src="assets/images/ico-logo.svg" alt="logo">
-			</figure>
-		</a>
-		<nav>
-			<ul class="main-nav">
-				<li><a routerLink="/games" routerLinkActive="active">Games</a></li>
-				<li><a routerLink="/library" routerLinkActive="active">Library</a></li>
-				<li><a routerLink="/friends" routerLinkActive="active">Friends</a></li>
-				<li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
-			</ul>
+		<nav class="navbar navbar-expand-lg navbar-light">
+			<a class="logo" routerLink="/">
+				<figure class="ico-holder">
+					<img src="assets/images/ico-logo.svg" alt="logo">
+				</figure>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="main-nav">
+					<li><a routerLink="/games" routerLinkActive="active">Games</a></li>
+					<li><a routerLink="/library" routerLinkActive="active">Library</a></li>
+					<li><a routerLink="/friends" routerLinkActive="active">Friends</a></li>
+					<li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+				</ul>
+				<button mat-raised-button color="primary" class="log-out" (click)="logOut()">Log out</button>
+			</div>
 		</nav>
-		<button mat-raised-button color="primary" class="log-out" (click)="logOut()">Log out</button>
 	</div>
 </header>

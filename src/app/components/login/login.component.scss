@@ -8,18 +8,24 @@
 		display: flex;
 		.app-modal {
 			min-height: 34rem;
-			width: 32rem;
+			width: 95%;
 			margin: auto;
 			background: $white;
 			border-radius: 0.4rem;
 			box-shadow: 0 0.4rem 0.4rem rgba($black, 0.25);
-			padding: 6rem;
+			padding: 3rem;
 			text-align: center;
+			@media screen and (min-width: 768px) {
+				width: 32rem;
+				padding: 6rem;
+			}
 			form {
 				font-size: 1.4rem;
 				text-align: left;
 			}
-
+			.mat-form-field {
+				width: 100%;
+			}
 			.mat-raised-button {
 				width: 100%;
 			}
