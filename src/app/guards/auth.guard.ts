@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 		if (this.authentificationService.isAuthentifacated) {
 			return true;
 		}
-		this.router.navigate(['']);
 		return false;
 	}
 	canActivateChild(
