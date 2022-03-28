@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthentificationService {
 
 	users: User[] = [];
-	isAuthentifacated = sessionStorage.getItem('accessGuard');
+	isAuthentifacated = sessionStorage.length > 0 ? true : false;
 
 	constructor(
 		private http: HttpClient,
@@ -23,11 +23,10 @@ export class AuthentificationService {
 
 	authentificate(user: User, users: User[]): boolean {
 		if (this.checkCredentials(user, users)) {
-			sessionStorage.setItem('accessGuard', 'yes');
+			this.isAuthentifacated = true;
 			this.router.navigate(['games']);
 			return true;
 		}
-		sessionStorage.removeItem('accessGuard');
 		return false;
 	}
 
@@ -55,7 +54,7 @@ export class AuthentificationService {
 
 	logOut() {
 		this.router.navigate(['']);
-		sessionStorage.removeItem('accessGuard');
+		this.isAuthentifacated = false;
 		sessionStorage.removeItem('userId');
 		sessionStorage.removeItem('userEmail');
 	}
