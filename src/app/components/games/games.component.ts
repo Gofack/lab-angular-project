@@ -94,7 +94,7 @@ export class GamesComponent implements OnInit, OnDestroy {
 
 		this.innerFilteredGames = this.filteredGames.filter(el => {
 			console.log(el.name);
-			if (el.name.includes(term)) {
+			if (el.name.toLocaleLowerCase().includes(term)) {
 				return el;
 			}
 			return false;

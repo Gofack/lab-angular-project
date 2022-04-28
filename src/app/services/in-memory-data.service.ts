@@ -4,6 +4,26 @@ import { Observable } from 'rxjs';
 import { Game } from '../interfaces/game';
 import { User } from '../interfaces/user';
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyBphR8rRuqiX7S1JXrnNQbqsCvrQuqgIus",
+	authDomain: "lab-angular-project-c522c.firebaseapp.com",
+	databaseURL: "https://lab-angular-project-c522c-default-rtdb.firebaseio.com",
+	projectId: "lab-angular-project-c522c",
+	storageBucket: "lab-angular-project-c522c.appspot.com",
+	messagingSenderId: "188465322165",
+	appId: "1:188465322165:web:7dc7e4cac71053775586fc"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
 @Injectable({
 	providedIn: 'root'
 })
